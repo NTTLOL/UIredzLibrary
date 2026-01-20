@@ -8,9 +8,9 @@ local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
 
-local Razlib = {
+local redzlib = {
     Themes = {
-        NTTLOL Hub= {
+        TuanAnhIOS= {
             ["Color Hub 1"] = ColorSequence.new({
                 ColorSequenceKeypoint.new(0.00, Color3.fromRGB(0, 0, 30)),
                 ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 100, 255)),
@@ -865,12 +865,12 @@ local Razlib = {
 local ViewportSize = workspace.CurrentCamera.ViewportSize
 local UIScale = ViewportSize.Y / 450
 
-local Settings = Razlib.Settings
-local Flags = Razlib.Flags
+local Settings = redzlib.Settings
+local Flags = redzlib.Flags
 
 local SetProps, SetChildren, InsertTheme, Create do
 	InsertTheme = function(Instance, Type)
-		table.insert(Razlib.Instances, {
+		table.insert(redzlib.Instances, {
 			Instance = Instance,
 			Type = Type
 		})
@@ -919,14 +919,14 @@ local SetProps, SetChildren, InsertTheme, Create do
 			local decode = HttpService:JSONDecode(readfile(file))
 			
 			if type(decode) == "table" then
-				if rawget(decode, "UISize") then Razlib.Save["UISize"] = decode["UISize"] end
-				if rawget(decode, "TabSize") then Razlib.Save["TabSize"] = decode["TabSize"] end
-				if rawget(decode, "Theme") and VerifyTheme(decode["Theme"]) then Razlib.Save["Theme"] = decode["Theme"] end
+				if rawget(decode, "UISize") then redzlib.Save["UISize"] = decode["UISize"] end
+				if rawget(decode, "TabSize") then redzlib.Save["TabSize"] = decode["TabSize"] end
+				if rawget(decode, "Theme") and VerifyTheme(decode["Theme"]) then redzlib.Save["Theme"] = decode["Theme"] end
 			end
 		end
 	end
 	
-	pcall(Save, "Raz library V5.json")
+	pcall(Save, "redz library V5.json")
 end
 
 local Funcs = {} do
@@ -986,7 +986,7 @@ local Funcs = {} do
 	end
 end
 
-local Connections, Connection = {}, Razlib.Connection do
+local Connections, Connection = {}, redzlib.Connection do
 	local function NewConnectionList(List)
 		if type(List) ~= "table" then return end
 		
@@ -1068,7 +1068,7 @@ local GetFlag, SetFlag, CheckFlag do
 end
 
 local ScreenGui = Create("ScreenGui", CoreGui, {
-	Name = "Raz Library V5",
+	Name = "redz Library V5",
 }, {
 	Create("UIScale", {
 		Scale = UIScale,
@@ -1152,7 +1152,7 @@ local function MakeDrag(Instance)
 end
 
 local function VerifyTheme(Theme)
-	for name,_ in pairs(Razlib.Themes) do
+	for name,_ in pairs(redzlib.Themes) do
 		if name == Theme then
 			return true
 		end
@@ -1166,14 +1166,14 @@ local function SaveJson(FileName, save)
 	end
 end
 
-local Theme = Razlib.Themes[Razlib.Save.Theme]
+local Theme = redzlib.Themes[redzlib.Save.Theme]
 
 local function AddEle(Name, Func)
-	Razlib.Elements[Name] = Func
+	redzlib.Elements[Name] = Func
 end
 
 local function Make(Ele, Instance, props, ...)
-	local Element = Razlib.Elements[Ele](Instance, props, ...)
+	local Element = redzlib.Elements[Ele](Instance, props, ...)
 	return Element
 end
 
@@ -1320,7 +1320,7 @@ local function GetColor(Instance)
 end
 
 -- /////////// --
-function Razlib:GetIcon(index)
+function redzlib:GetIcon(index)
 	if type(index) ~= "string" or index:find("rbxassetid://") or #index == 0 then
 		return index
 	end
@@ -1343,15 +1343,15 @@ function Razlib:GetIcon(index)
 	return firstMatch or index
 end
 
-function Razlib:SetTheme(NewTheme)
+function redzlib:SetTheme(NewTheme)
 	if not VerifyTheme(NewTheme) then return end
 	
-	Razlib.Save.Theme = NewTheme
-	SaveJson("Raz library V5.json", Razlib.Save)
-	Theme = Razlib.Themes[NewTheme]
+	redzlib.Save.Theme = NewTheme
+	SaveJson("redz library V5.json", redzlib.Save)
+	Theme = redzlib.Themes[NewTheme]
 	
 	Comnection:FireConnection("ThemeChanged", NewTheme)
-	table.foreach(Razlib.Instances, function(_,Val)
+	table.foreach(redzlib.Instances, function(_,Val)
 		if Val.Type == "Gradient" then
 			Val.Instance.Color = Theme["Color Hub 1"]
 		elseif Val.Type == "Frame" then
@@ -1370,14 +1370,14 @@ function Razlib:SetTheme(NewTheme)
 	end)
 end
 
-function Razlib:SetScale(NewScale)
+function redzlib:SetScale(NewScale)
 	NewScale = ViewportSize.Y / math.clamp(NewScale, 300, 2000)
 	UIScale, ScreenGui.Scale.Scale = NewScale, NewScale
 end
 
-function Razlib:MakeWindow(Configs)
-	local WTitle = Configs[1] or Configs.Name or Configs.Title or "Raz Library V5"
-	local WMiniText = Configs[2] or Configs.SubTitle or "by : Raz9999"
+function redzlib:MakeWindow(Configs)
+	local WTitle = Configs[1] or Configs.Name or Configs.Title or "redz Library V5"
+	local WMiniText = Configs[2] or Configs.SubTitle or "by : redz9999"
 	
 	Settings.ScriptFile = Configs[3] or Configs.SaveFolder or false
 	
@@ -1397,7 +1397,7 @@ function Razlib:MakeWindow(Configs)
 		end
 	end;LoadFile()
 	
-	local UISizeX, UISizeY = unpack(Razlib.Save.UISize)
+	local UISizeX, UISizeY = unpack(redzlib.Save.UISize)
 	local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
 		Size = UDim2.fromOffset(UISizeX, UISizeY),
 		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
@@ -1453,7 +1453,7 @@ function Razlib:MakeWindow(Configs)
 	}), "Text")
 	
 	local MainScroll = InsertTheme(Create("ScrollingFrame", Components, {
-		Size = UDim2.new(0, Razlib.Save.TabSize, 1, -TopBar.Size.Y.Offset),
+		Size = UDim2.new(0, redzlib.Save.TabSize, 1, -TopBar.Size.Y.Offset),
 		ScrollBarImageColor3 = Theme["Color Theme"],
 		Position = UDim2.new(0, 0, 1, 0),
 		AnchorPoint = Vector2.new(0, 1),
@@ -1516,14 +1516,14 @@ function Razlib:MakeWindow(Configs)
 	
 	ConnectSave(ControlSize1, function()
 		if not Minimized then
-			Razlib.Save.UISize = {MainFrame.Size.X.Offset, MainFrame.Size.Y.Offset}
-			SaveJson("Raz library V5.json", Razlib.Save)
+			redzlib.Save.UISize = {MainFrame.Size.X.Offset, MainFrame.Size.Y.Offset}
+			SaveJson("redz library V5.json", redzlib.Save)
 		end
 	end)
 	
 	ConnectSave(ControlSize2, function()
-		Razlib.Save.TabSize = MainScroll.Size.X.Offset
-		SaveJson("Raz library V5.json", Razlib.Save)
+		redzlib.Save.TabSize = MainScroll.Size.X.Offset
+		SaveJson("redz library V5.json", redzlib.Save)
 	end)
 	
 	local ButtonsFolder = Create("Folder", TopBar, {
@@ -1731,9 +1731,9 @@ function Razlib:MakeWindow(Configs)
 	end
 	function Window:SelectTab(TabSelect)
 		if type(TabSelect) == "number" then
-			Razlib.Tabs[TabSelect].func:Enable()
+			redzlib.Tabs[TabSelect].func:Enable()
 		else
-			for _,Tab in pairs(Razlib.Tabs) do
+			for _,Tab in pairs(redzlib.Tabs) do
 				if Tab.Cont == TabSelect.Cont then
 					Tab.func:Enable()
 				end
@@ -1747,7 +1747,7 @@ function Razlib:MakeWindow(Configs)
 		local TName = Configs[1] or Configs.Title or "Tab!"
 		local TIcon = Configs[2] or Configs.Icon or ""
 		
-		TIcon = Razlib:GetIcon(TIcon)
+		TIcon = redzlib:GetIcon(TIcon)
 		if not TIcon:find("rbxassetid://") or TIcon:gsub("rbxassetid://", ""):len() < 6 then
 			TIcon = false
 		end
@@ -1823,7 +1823,7 @@ function Razlib:MakeWindow(Configs)
 			end
 			Container.Parent = Containers
 			Container.Size = UDim2.new(1, 0, 1, 150)
-			table.foreach(Razlib.Tabs, function(_,Tab)
+			table.foreach(redzlib.Tabs, function(_,Tab)
 				if Tab.Cont ~= Container then
 					Tab.func:Disable()
 				end
@@ -1838,7 +1838,7 @@ function Razlib:MakeWindow(Configs)
 		
 		FirstTab = true
 		local Tab = {}
-		table.insert(Razlib.Tabs, {TabInfo = {Name = TName, Icon = TIcon}, func = Tab, Cont = Container})
+		table.insert(redzlib.Tabs, {TabInfo = {Name = TName, Icon = TIcon}, func = Tab, Cont = Container})
 		Tab.Cont = Container
 		
 		function Tab:Disable()
@@ -1879,7 +1879,7 @@ function Razlib:MakeWindow(Configs)
 			}), "Text")
 			
 			local Section = {}
-			table.insert(Razlib.Options, {type = "Section", Name = SectionName, func = Section})
+			table.insert(redzlib.Options, {type = "Section", Name = SectionName, func = Section})
 			function Section:Visible(Bool)
 				if Bool == nil then SectionFrame.Visible = not SectionFrame.Visible return end
 				SectionFrame.Visible = Bool
@@ -2676,4 +2676,4 @@ function Razlib:MakeWindow(Configs)
 	return Window
 end
 
-return Razlib
+return redzlib
