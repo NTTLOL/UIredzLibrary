@@ -1,0 +1,129 @@
+--// Raz Hub - Banana Premium Style (UI ONLY)
+
+local Library = {}
+
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "RazHub_UI"
+ScreenGui.Parent = game.CoreGui
+
+local Main = Instance.new("Frame")
+Main.Size = UDim2.fromOffset(600, 360)
+Main.Position = UDim2.fromScale(0.5, 0.5)
+Main.AnchorPoint = Vector2.new(0.5, 0.5)
+Main.BackgroundColor3 = Color3.fromRGB(18,18,18)
+Main.BackgroundTransparency = 0.25
+Main.BorderSizePixel = 0
+Main.Active = true
+Main.Draggable = true
+Main.Parent = ScreenGui
+
+Instance.new("UICorner", Main).CornerRadius = UDim.new(0,8)
+
+local MainStroke = Instance.new("UIStroke")
+MainStroke.Color = Color3.fromRGB(255,255,255)
+MainStroke.Thickness = 1.5
+MainStroke.Transparency = 0.75
+MainStroke.Parent = Main
+
+local Top = Instance.new("Frame")
+Top.Size = UDim2.new(1,0,0,42)
+Top.BackgroundColor3 = Color3.fromRGB(22,22,22)
+Top.BackgroundTransparency = 0.35
+Top.BorderSizePixel = 0
+Top.Parent = Main
+
+Instance.new("UICorner", Top).CornerRadius = UDim.new(0,8)
+
+local TopStroke = Instance.new("UIStroke")
+TopStroke.Color = Color3.fromRGB(255,255,255)
+TopStroke.Thickness = 1
+TopStroke.Transparency = 0.8
+TopStroke.Parent = Top
+
+local Title = Instance.new("TextLabel")
+Title.Size = UDim2.new(1,0,1,0)
+Title.BackgroundTransparency = 1
+Title.Text = "Raz Hub"
+Title.Font = Enum.Font.GothamBold
+Title.TextSize = 18
+Title.TextColor3 = Color3.new(1,1,1)
+Title.Parent = Top
+
+local Side = Instance.new("Frame")
+Side.Size = UDim2.fromOffset(64, 270)
+Side.Position = UDim2.fromOffset(12, 56)
+Side.BackgroundColor3 = Color3.fromRGB(22,22,22)
+Side.BackgroundTransparency = 0.35
+Side.BorderSizePixel = 0
+Side.Parent = Main
+
+Instance.new("UICorner", Side).CornerRadius = UDim.new(0,8)
+
+local SideStroke = Instance.new("UIStroke")
+SideStroke.Color = Color3.fromRGB(255,255,255)
+SideStroke.Thickness = 1
+SideStroke.Transparency = 0.8
+SideStroke.Parent = Side
+
+local SideLayout = Instance.new("UIListLayout", Side)
+SideLayout.Padding = UDim.new(0,10)
+SideLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+local Content = Instance.new("Frame")
+Content.Size = UDim2.fromOffset(480, 270)
+Content.Position = UDim2.fromOffset(96, 56)
+Content.BackgroundColor3 = Color3.fromRGB(24,24,24)
+Content.BackgroundTransparency = 0.35
+Content.BorderSizePixel = 0
+Content.Parent = Main
+
+Instance.new("UICorner", Content).CornerRadius = UDim.new(0,8)
+
+local ContentStroke = Instance.new("UIStroke")
+ContentStroke.Color = Color3.fromRGB(255,255,255)
+ContentStroke.Thickness = 1
+ContentStroke.Transparency = 0.8
+ContentStroke.Parent = Content
+
+local ContentLayout = Instance.new("UIListLayout", Content)
+ContentLayout.Padding = UDim.new(0,12)
+
+function Library:CreateTab()
+	local Btn = Instance.new("TextButton")
+	Btn.Size = UDim2.fromOffset(44,44)
+	Btn.BackgroundColor3 = Color3.fromRGB(35,35,35)
+	Btn.BackgroundTransparency = 0.4
+	Btn.Text = ""
+	Btn.Parent = Side
+
+	Instance.new("UICorner", Btn).CornerRadius = UDim.new(0,8)
+
+	local Stroke = Instance.new("UIStroke")
+	Stroke.Color = Color3.fromRGB(255,255,255)
+	Stroke.Thickness = 1
+	Stroke.Transparency = 0.85
+	Stroke.Parent = Btn
+
+	return Btn
+end
+
+function Library:CreateButton()
+	local Btn = Instance.new("TextButton")
+	Btn.Size = UDim2.new(1,-20,0,40)
+	Btn.BackgroundColor3 = Color3.fromRGB(35,35,35)
+	Btn.BackgroundTransparency = 0.4
+	Btn.Text = ""
+	Btn.Parent = Content
+
+	Instance.new("UICorner", Btn).CornerRadius = UDim.new(0,8)
+
+	local Stroke = Instance.new("UIStroke")
+	Stroke.Color = Color3.fromRGB(255,255,255)
+	Stroke.Thickness = 1
+	Stroke.Transparency = 0.85
+	Stroke.Parent = Btn
+
+	return Btn
+end
+
+return Library
